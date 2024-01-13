@@ -1,2 +1,2 @@
 # Project
-New repo
+## Whack a mole game
