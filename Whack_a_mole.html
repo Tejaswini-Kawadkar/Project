@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <title> Rabbit in The Hole </title>
+        
+        <style>
+            .container{
+                width: 70%;
+                margin: auto;
+                text-align: center;
+            }
+            .score{
+                float: right;
+                font-size: 30px;
+                color: black;
+            }
+            .chance{
+                float: left;
+                font-size: 30px;
+                color: black;
+            }
+            .grid-container{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                grid-gap: 10px;
+                padding: 10px;
+                margin-top: 20px;
+                margin-left: 200px;
+            }
+            .hole{
+                padding: 5px;
+                width: 150px;
+                height: 150px;
+            }
+            .bottom{
+                padding-top: 30px;
+            }
+            .btn{
+                background-color: #4ecca3;
+                border: none;
+                border-radius: 7px;
+                color: #ffff;
+                font-size: 30px;
+                padding: 16px 25px;
+                text-decoration: none;
+            }
+        </style>
+<!-- gameinterval = setInterval(displaymole(), 1000); -->
+<!-- clearInterval(gameInterval);  -->
+        <script>
+            var randomposition;
+            var scr = 0;
+            var chance = 5;
+        
+            function start(){
+                document.getElementById("start").style.visibility = "hidden";
+                
+                displaymole();
+            }
+            function displaymole(){
+                if(chance > 0){
+                    randomposition = Math.floor(Math.random()*9) + 1;
+                    setTimeout(function () { 
+                        document.getElementById(randomposition).setAttribute("src", "mole.png");
+                    }, 1000);
+                    holedisplay(randomposition);
+                    
+                }
+                else{
+                    
+                    alert("Game Over!!!!");
+                }
+            }
+            function holedisplay(position){
+                setTimeout(function () { 
+                    document.getElementById(position).setAttribute("src", "hole.png");
+                    return displaymole();
+                }, 1500);
+                
+            }
+            function myScore(id){
+                if(id == randomposition){
+                    scr = scr + 1;
+                    document.getElementById("scr").innerHTML = "Score : "+ scr; 
+                }
+                else{
+                    chance = chance - 1;
+                    document.getElementById("cha").innerHTML = "Chance : "+ chance;
+                }
+            }
+        </script>
+        
+    </head>
+    <body>
+        <div class="container">
+            <label class="score" id="scr"> Score : 0 </label>
+            <label class="chance" id="cha"> Chance : 5 </label>
+
+            <div class="grid-container">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="1" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="2" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="3" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="4" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="5" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="6" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="7" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="8" onclick="myScore(this.id)">
+                <input type="image" src="hole.png" alt="Submit" class="hole" id="9" onclick="myScore(this.id)">
+            </div>
+        </div>
+        <div class="container bottom">
+            <button type="button" class="btn" id="start" onclick="start()"> PLAY </button>
+        </div>
+    </body>
+</html>
